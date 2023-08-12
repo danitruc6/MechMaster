@@ -1,0 +1,18 @@
+{% extends "academy/layout.html" %}
+{% block content %}
+
+<h1>{{ quiz.title }}</h1>
+
+<form method="post" action="{% url 'take_quiz' quiz.id %}">
+  {% csrf_token %}
+  {% for question in questions %}
+  <h2>{{ question.text }}</h2>
+  {% for option in question.option_set.all %}
+  <input type="radio" name="question_{{ question.id }}" value="{{ option.id }}"> {{ option.text }}<br>
+  {% endfor %}
+  {% endfor %}
+  <input type="submit" value="Submit">
+</form>
+
+{% endblock %}
+
