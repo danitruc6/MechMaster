@@ -17,4 +17,7 @@ urlpatterns = [
     path('forum/category/<int:category_id>/create/', views.forum_create_topic, name='forum_create_topic'),
     path('like_topic/<int:topic_id>/', views.like_topic, name='like_topic'),
     path('resources/', views.resources_page, name="resources_page"),
+    path('quiz/<int:quiz_id>/', views.take_quiz, name='take_quiz'),
+    path('quiz/<int:quiz_id>/result/', views.quiz_result, name='quiz_result'),
+    path('submit_quiz/<int:quiz_id>/', views.submit_quiz, name='submit_quiz'),
 ]

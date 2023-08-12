@@ -13,8 +13,12 @@ from django import forms
 from django.views.decorators.http import require_POST, require_http_methods
 from django.db.models import Avg, Count
 
-from .models import User, Profile, Course, ForumCategory, ForumTopic, ForumPost
-from .forms import ReviewForm, ForumTopicForm, ForumPostForm, ProfileForm
+from .models import User, Profile, Course, ForumCategory, ForumTopic, ForumPost, Quiz, Question, Option, QuizAttempt
+
+from .forms import ReviewForm, ForumTopicForm, ForumPostForm, ProfileForm, QuizAttemptForm
+from .models import Quiz, Question, Option, QuizAttempt
+from .forms import QuizAttemptForm
+
 
 def index(request):
     return render(request, "academy/index.html")
@@ -265,3 +269,63 @@ def like_topic(request, topic_id):
 
 def resources_page(request):
     return render(request, 'academy/resources.html')
+
+
+@login_required
+def take_quiz(request, quiz_id):
+    quiz = get_object_or_404(Quiz, id=quiz_id)
+    questions = Question.objects.filter(quiz=quiz)
+    attempt = QuizAttempt.objects.filter(user=request.user, quiz=quiz).first()
+
+    if attempt and attempt.attempts_left == 0:
+        return render(request, 'academy/quiz_finished.html', {'quiz': quiz, 'score': attempt.score})
+
+    if request.method == 'POST':
+        user_scores = []
+        for question in questions:
+            user_option_id = request.POST.get(f'question_{question.id}')
+            if user_option_id:
+                user_option = Option.objects.filter(id=user_option_id, question=question).first()
+                if user_option.is_correct:
+                    user_scores.append(1)
+
+        total_score = sum(user_scores)
+        if not attempt:
+            attempt = QuizAttempt(user=request.user, quiz=quiz, score=total_score, attempts_left=1)
+        else:
+            attempt.score = max(attempt.score, total_score)
+            attempt.attempts_left -= 1
+        attempt.save()
+
+        return redirect('quiz_result', quiz_id=quiz_id)
+
+    return render(request, 'academy/take_quiz.html', {'quiz': quiz, 'questions': questions})
+
+
+@login_required
+def quiz_result(request, quiz_id):
+    quiz = get_object_or_404(Quiz, id=quiz_id)
+    attempt = QuizAttempt.objects.filter(user=request.user, quiz=quiz).first()
+    
+    if attempt:
+        total_questions = quiz.questions_qty
+        percentage_score = (attempt.score / total_questions) * 100 if total_questions > 0 else 0
+
+        return render(request, 'academy/quiz_result.html', {'quiz': quiz, 'percentage_score': percentage_score})
+    else:
+        return render(request, 'academy/quiz_result.html', {'quiz': quiz, 'percentage_score': 0})
+
+
+@login_required
+def submit_quiz(request, quiz_id):
+    if request.method == 'POST':
+        quiz = get_object_or_404(Quiz, id=quiz_id)
+        score = int(request.POST.get('score', 0))
+
+        attempt, created = QuizAttempt.objects.get_or_create(user=request.user, quiz=quiz)
+        if score > attempt.score:
+            attempt.score = score
+            attempt.attempts_left -= 1
+            attempt.save()
+
+        return JsonResponse({'redirect_url': reverse('quiz_result', args=[quiz_id])})

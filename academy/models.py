@@ -92,3 +92,38 @@ class ForumPost(models.Model):
 
     def __str__(self):
         return f"Post by {self.user.username} in {self.topic.title}"
+
+class Quiz(models.Model):
+    title = models.CharField(max_length=200)
+    questions_qty = models.IntegerField(default=1)
+
+    def __str__(self):
+        return self.title
+
+
+class Question(models.Model):
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    text = models.TextField()
+
+    def __str__(self):
+        return self.text
+    def display_options(self):
+        return self.option_set.all()
+
+
+class Option(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    text = models.CharField(max_length=200)
+    is_correct = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Q: {self.question.text}, A: {self.text} --> is it correct: {self.is_correct}"
+
+class QuizAttempt(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    score = models.IntegerField(default=0)
+    attempts_left = models.IntegerField(default=2)
+    
+    def __str__(self):
+        return str(self.quiz)

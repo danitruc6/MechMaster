@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile, Review, ForumTopic, ForumPost
+from .models import *
 
 class ProfileForm(forms.ModelForm):
     class Meta:
@@ -55,3 +55,12 @@ class ForumPostForm(forms.ModelForm):
         labels = {
             'content': ''
         }
+
+class QuizAttemptForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        question = kwargs.pop('question')
+        super().__init__(*args, **kwargs)
+        options = Option.objects.filter(question=question)
+        choices = [(option.id, option.text) for option in options]
+        self.fields['options'] = forms.ChoiceField(widget=forms.RadioSelect, choices=choices)
+
