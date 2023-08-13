@@ -94,11 +94,11 @@ class ForumPost(models.Model):
         return f"Post by {self.user.username} in {self.topic.title}"
 
 class Quiz(models.Model):
-    title = models.CharField(max_length=200)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     questions_qty = models.IntegerField(default=1)
 
     def __str__(self):
-        return self.title
+        return f"Quiz for {self.course.title}"
 
 
 class Question(models.Model):

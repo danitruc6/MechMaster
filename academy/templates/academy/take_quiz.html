@@ -2,7 +2,7 @@
 {% block content %}
 {% load static %}
 
-<h1 class="quiz_title">{{ quiz.title }}</h1>
+<h1 class="quiz_title">{{ quiz.course.title }} Quiz</h1>
 
 <form id="quiz-form" method="post" action="{% url 'take_quiz' quiz.id %}">
   {% csrf_token %}
