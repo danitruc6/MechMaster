@@ -1,18 +1,23 @@
 {% extends "academy/layout.html" %}
 {% block content %}
+{% load static %}
 
-<h1>{{ quiz.title }}</h1>
+<h1 class="quiz_title">{{ quiz.title }}</h1>
 
-<form method="post" action="{% url 'take_quiz' quiz.id %}">
+<form id="quiz-form" method="post" action="{% url 'take_quiz' quiz.id %}">
   {% csrf_token %}
   {% for question in questions %}
-  <h2>{{ question.text }}</h2>
+  <hr>
+  <h2 class="quiz_question">{{ question.text }}</h2>
   {% for option in question.option_set.all %}
-  <input type="radio" name="question_{{ question.id }}" value="{{ option.id }}"> {{ option.text }}<br>
+  <input type="radio" name="question_{{ question.id }}" value="{{ option.id }}" required> {{ option.text }}<br>
   {% endfor %}
+  <p id="error-{{ question.id }}" class="error-msg" style="color: red; display: none;">Please select an option</p>
   {% endfor %}
+  <hr>
   <input type="submit" value="Submit">
 </form>
 
-{% endblock %}
+<script src="{% static 'academy/take_quiz.js' %}"></script>
 
+{% endblock %}

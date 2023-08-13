@@ -17,7 +17,7 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'index' %}">MechMaster</a>
+      <a class="navbar-brand" href="{% url 'index' %}"><span class="nav_title1">Mech</span><span class="nav_title2">Master</span></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -41,16 +41,16 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'profile' user.username %}"> 
                 {% comment %} <img class="profile-pic-bar" src="{{ profile.profile_picture }}" alt="Profile Picture"/>  {% endcomment %}
-                <strong>{{ user.username }}</strong>
+                <strong class="username_text">{{ user.username }}</strong>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
+              <a class="nav-link" href="{% url 'logout' %}"><span class="logout_text">Sign out</span></a>
             </li>
           {% else %}
              <li class="nav-item">
               {% comment %} after login it will go to next page which initiated the request. {% endcomment %}
-               <a class="nav-link" href="{% url 'login' %}?next={{request.path}}">Sign In</a>
+               <a class="nav-link" href="{% url 'login' %}?next={{request.path}}"><span class="login_text">Sign in</span></a>
              </li>
              <li class="nav-item">
                <a class="nav-link" href="{% url 'register' %}">Sign Up</a>

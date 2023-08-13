@@ -321,6 +321,8 @@ def submit_quiz(request, quiz_id):
     if request.method == 'POST':
         quiz = get_object_or_404(Quiz, id=quiz_id)
         score = int(request.POST.get('score', 0))
+        print(request)
+        print(f"The score is {score}")
 
         attempt, created = QuizAttempt.objects.get_or_create(user=request.user, quiz=quiz)
         if score > attempt.score:

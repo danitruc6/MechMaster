@@ -376,3 +376,27 @@
   height: 20px; /* Set the desired height */
   overflow: hidden; /* Hide any overflow */
 }
+
+.quiz_title {
+  color: var(--color-red);
+}
+
+.quiz_question {
+  color: var(--color-cyan);
+}
+
+.nav_title1 {
+  color: var(--color-red)
+}
+.nav_title2 {
+  color: var(--color-orange)
+}
+.username_text {
+  color: var(--color-cyan)
+}
+.logout_text {
+  color: var(--color-red)
+}
+.login_text {
+  color: var(--color-green)
+}
