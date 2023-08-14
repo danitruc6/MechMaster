@@ -162,8 +162,20 @@ def course_registration(request, course_id):
 def course_page(request, course_id):
     course = get_object_or_404(Course, pk=course_id)
     average_rating = course.reviews.aggregate(Avg('rating'))['rating__avg']
-    context = {'course': course, 'average_rating': average_rating}
+    quiz = Quiz.objects.filter(course=course).first()  # Get the associated quiz
+
+    # Get the user's quiz attempt for the course
+    attempt = QuizAttempt.objects.filter(user=request.user, quiz=quiz).first()
+
+    context = {
+        'course': course,
+        'average_rating': average_rating,
+        'quiz': quiz,
+        'quiz_attempt': attempt,
+    }
     return render(request, 'academy/course_page.html', context)
+
+
 
 @login_required
 def create_review(request, course_id):

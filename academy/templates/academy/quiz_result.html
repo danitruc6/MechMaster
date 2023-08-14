@@ -3,6 +3,11 @@
 
 <h1>Quiz Result</h1>
 <h2>{{ quiz.title }}</h2>
-<p>Your score: {{ percentage_score }}%</p>
+{% if percentage_score > 70%}
+    <p class="text_green">Your score: {{ percentage_score }}%</p>
+{% else %}
+    <p class="text_red">Your score: {{ percentage_score }}%</p>
+{% endif %}
+<a href="{% url 'course_page' quiz.course.id %}" class="btn button">Back to Course</a>
 
 {% endblock %}

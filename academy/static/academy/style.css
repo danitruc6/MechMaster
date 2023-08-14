@@ -400,3 +400,9 @@
 .login_text {
   color: var(--color-green)
 }
+.text_green {
+  color: var(--color-green)
+}
+.text_red {
+  color: var(--color-red)
+}

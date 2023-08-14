@@ -45,6 +45,9 @@
                   <li class="nav-item">
                     <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="quiz-tab" data-toggle="tab" href="#quiz" role="tab" aria-controls="quiz" aria-selected="false">Quiz</a>
+                  </li>
                 </ul>
                 <div class="tab-content" id="courseTabsContent">
                   <div class="tab-pane fade show active" id="content" role="tabpanel" aria-labelledby="content-tab">
@@ -123,6 +126,32 @@
                     
 
                   </div>
+
+                  <!-- Display the quiz information -->
+                  <div class="tab-pane fade" id="quiz" role="tabpanel" aria-labelledby="quiz-tab">
+                    <h4>Quiz</h4>
+                    {% if quiz %}
+                      <p>This quiz consist on {{ quiz.questions_qty }} questions related to the course content, and you only have 2 attempts in total to try this quiz.</p>
+                      {% if  quiz_attempt.attempts_left > 0%}
+                        {% if quiz_attempt %}
+                          <p>Attempts left: {{ quiz_attempt.attempts_left }}</p>
+                          {% if quiz_attempt.attempts_left < 2 %}
+                            <p>Your last attempt score: {{ quiz_attempt.score }}/{{ quiz.questions_qty }}</p>
+                          {% endif %}
+                        {% else %}
+                          <p>You have not attempted this quiz yet.</p>
+                        {% endif %}
+                        <a href="{% url 'take_quiz' quiz.id %}" class="btn button">Take Quiz</a>
+                      {% else%}
+                        <p>Congratulations! You have completed the quiz.</p>
+                        <p class="text_green"> Your final score is {{ quiz_attempt.score }} out of {{ quiz.questions_qty }} questions.</p>
+
+                      {% endif%}
+                    {% else %}
+                      <p>No quiz available for this course.</p>
+                    {% endif %}
+                  </div>
+
                 </div>
               </div>
             </div>
