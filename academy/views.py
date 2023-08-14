@@ -95,6 +95,9 @@ def profile(request, username):
     for topic in user_topics:
         num_replies += topic.posts.count()
 
+    # Fetch quiz attempts for the user
+    quiz_attempts = QuizAttempt.objects.filter(user=profile.user)
+
     # Separate handling for GET and POST requests
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=profile)
@@ -110,7 +113,8 @@ def profile(request, username):
         'num_topics': num_topics,
         'num_posts': num_posts,
         'num_replies': num_replies,
-        'profile_form': form
+        'profile_form': form,
+        'quiz_attempts': quiz_attempts,  # Pass the quiz attempts to the template
     })
 
 @login_required

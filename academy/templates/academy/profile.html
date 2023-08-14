@@ -40,60 +40,28 @@
 
     <ul class="nav nav-tabs" id="profileTabs" role="tablist">
       <li class="nav-item">
-        <a
-          class="nav-link active"
-          id="courses-tab"
-          data-toggle="tab"
-          href="#courses"
-          role="tab"
-          aria-controls="courses"
-          aria-selected="true"
-          >Courses</a
-        >
+        <a class="nav-link active" id="courses-tab" data-toggle="tab" href="#courses" role="tab" aria-controls="courses" aria-selected="true" >Courses</a>
       </li>
       <li class="nav-item">
-        <a
-          class="nav-link"
-          id="topics-tab"
-          data-toggle="tab"
-          href="#topics"
-          role="tab"
-          aria-controls="topics"
-          aria-selected="false"
-          >Topics</a
-        >
+        <a class="nav-link" id="topics-tab" data-toggle="tab" href="#topics" role="tab" aria-controls="topics" aria-selected="false">Topics</a>
       </li>
       <li class="nav-item">
-        <a
-          class="nav-link"
-          id="progress-tab"
-          data-toggle="tab"
-          href="#progress"
-          role="tab"
-          aria-controls="progress"
-          aria-selected="false"
-          >Forum Participation</a
-        >
+        <a class="nav-link" id="progress-tab" data-toggle="tab" href="#progress" role="tab" aria-controls="progress" aria-selected="false" >Forum Participation</a>
+      </li>
+      <!-- Quiz Scores Tab -->
+      <li class="nav-item">
+        <a class="nav-link" id="quiz-scores-tab" data-toggle="tab" href="#quiz-scores" role="tab" aria-controls="quiz-scores" aria-selected="false">Quiz Scores</a>
       </li>
     </ul>
 
     <div class="tab-content" id="profileTabsContent">
       <!-- Courses Tab -->
-      <div
-        class="tab-pane fade show active"
-        id="courses"
-        role="tabpanel"
-        aria-labelledby="courses-tab"
-      >
+      <div class="tab-pane fade show active" id="courses" role="tabpanel" aria-labelledby="courses-tab" >
         <h2>Registered Courses</h2>
         {% if profile.courses.exists %}
         <ul class="list-group">
           {% for course in profile.courses.all %}
-          <a
-            href="{% url 'course_page' course.id %}"
-            class="list-group-item list-group-item-action list-custom"
-            >{{ course.title }}</a
-          >
+          <a href="{% url 'course_page' course.id %}" class="list-group-item list-group-item-action list-custom">{{ course.title }}</a>
           {% endfor %}
         </ul>
         {% else %}
@@ -102,21 +70,12 @@
       </div>
 
       <!-- Topics Tab -->
-      <div
-        class="tab-pane fade"
-        id="topics"
-        role="tabpanel"
-        aria-labelledby="topics-tab"
-      >
+      <div class="tab-pane fade" id="topics" role="tabpanel" aria-labelledby="topics-tab">
         <h2>Created Topics</h2>
         {% if user_topics.exists %}
         <ul class="list-group">
           {% for topic in user_topics %}
-          <a
-            href="{% url 'forum_topic_detail' topic.id %}"
-            class="list-group-item list-group-item-action list-custom"
-            >{{ topic.title }}</a
-          >
+          <a href="{% url 'forum_topic_detail' topic.id %}" class="list-group-item list-group-item-action list-custom" >{{ topic.title }}</a>
           {% endfor %}
         </ul>
         {% else %}
@@ -125,12 +84,7 @@
       </div>
 
       <!-- My Progress Tab -->
-      <div
-        class="tab-pane fade"
-        id="progress"
-        role="tabpanel"
-        aria-labelledby="progress-tab"
-      >
+      <div class="tab-pane fade" id="progress" role="tabpanel" aria-labelledby="progress-tab">
         <p class="mt-2">Check out your forum participation and contributions:</p>
         <ul>
           <li>Total Topics Created: {{ num_topics }}</li>
@@ -138,20 +92,26 @@
           <li>Total Replies Received: {{ num_replies }}</li>
         </ul>
       </div>
+      <!-- Quiz Scores Tab Content -->
+      <div class="tab-pane fade" id="quiz-scores" role="tabpanel" aria-labelledby="quiz-scores-tab">
+      <h2>Quiz Scores</h2>
+      {% if quiz_attempts.exists %}
+      <ul class="list-group">
+          {% for attempt in quiz_attempts %}
+          <a href="{% url 'quiz_result' quiz_id=attempt.quiz.id %}" class="list-group-item list-group-item-action list-custom" >{{ attempt.quiz.course.title }} Quiz - Score: {{ attempt.score }}/{{ attempt.quiz.questions_qty }}.</a>
+          {% endfor %}
+      </ul>
+      {% else %}
+      <p>No quiz scores available.</p>
+      {% endif %}
+      </div>
     </div>
   </div>
 </div>
 
 
 <!-- Edit Profile Modal Popup -->
-<div
-  class="modal fade"
-  id="editProfileModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="editProfileModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -161,11 +121,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form
-          method="POST"
-          enctype="multipart/form-data"
-          action="{% url 'profile' user.username %}"
-        >
+        <form method="POST" enctype="multipart/form-data" action="{% url 'profile' user.username %}">
           {% csrf_token %} {{ profile_form.as_p }}
           <button type="submit" class="btn button">Save Changes</button>
         </form>
