@@ -39,7 +39,7 @@ admin.site.register(QuizAttempt)
 
 class QuestionOptionInLine(admin.TabularInline):
     model = Option
-    extra = 1
+    extra = 4
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):

@@ -52,6 +52,7 @@
   
   /* Form input colors */
   input[type="text"],
+  input[type="email"],
   input[type="password"],
   textarea {
     background-color: var(--color-selection);
