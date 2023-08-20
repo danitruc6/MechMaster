@@ -100,7 +100,7 @@ def profile(request, username):
 
     # Separate handling for GET and POST requests
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=profile)
+        form = ProfileForm(request.POST, request.FILES,instance=profile)
         if form.is_valid():
             form.save()
             return redirect('profile', username=username)

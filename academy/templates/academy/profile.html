@@ -22,7 +22,13 @@
     <div class="container mb-4">
       <h1>User Profile</h1>
       <div class="d-flex flex-row">
-        <div class="profile-info me-4"> <img class="profile-pic" src="{{ profile.profile_picture }}" alt="Profile Picture"/> </div>
+        <div class="profile-info me-4"> 
+          {% if profile.profile_pic_upload %}
+            <img class="profile-pic" src="{{ profile.profile_pic_upload.url }}" alt="Profile Picture"/> 
+          {% else %}
+            <img class="profile-pic" src="{% static 'academy/images/no_image.webp' %}" alt="Profile Picture"/> 
+          {% endif %}
+        </div>
         <div class="d-flex flex-column">
           <div > <h2>{{ profile.user.username }}</h2> </div>
           <div class="row"> <p>{{ profile.bio }}</p> </div>

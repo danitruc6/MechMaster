@@ -4,13 +4,13 @@ from .models import *
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['profile_picture', 'bio']
+        fields = ['profile_pic_upload','bio']
         widgets = {
             'profile_picture': forms.TextInput(attrs={'placeholder': 'Enter the URL here', 'size':40}),
             'bio': forms.Textarea(attrs={'placeholder': 'Enter you bio here...', 'rows': 3, 'cols': 40})
         }
         labels ={
-            'profile_picture': 'Profile picture URL',
+            'profile_pic_upload':'',
             'bio': 'Bio Description',
         }
 

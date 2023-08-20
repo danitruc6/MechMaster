@@ -7,9 +7,10 @@ class User(AbstractUser):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.URLField(max_length=200, default = "https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg")
+    # profile_picture = models.URLField(max_length=200, default = "https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg")
     bio = models.TextField(blank=True)
     courses = models.ManyToManyField('Course', related_name='profiles')
+    profile_pic_upload = models.ImageField(null=True, blank=True, upload_to="images/")
 
     def __str__(self):
         return self.user.username
