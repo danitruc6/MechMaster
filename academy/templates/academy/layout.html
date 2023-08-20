@@ -27,9 +27,6 @@
             <a class="nav-link active" aria-current="page" href="{% url 'course_list'%}">Courses</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">My Progress</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="{% url 'forum_category_list' %}">Forum</a>
           </li>
           <li class="nav-item">
@@ -41,19 +38,19 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'profile' user.username %}"> 
                 {% comment %} <img class="profile-pic-bar" src="{{ profile.profile_picture }}" alt="Profile Picture"/>  {% endcomment %}
-                <strong class="username_text">{{ user.username }}</strong>
+                <strong class="username_text"><i class="fas fa-user-circle"></i> {{ user.username }}</strong>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}"><span class="logout_text">Sign out</span></a>
+              <a class="nav-link" href="{% url 'logout' %}"><span class="logout_text"><i class="fas fa-sign-out-alt"></i> Sign out</span></a>
             </li>
           {% else %}
              <li class="nav-item">
               {% comment %} after login it will go to next page which initiated the request. {% endcomment %}
-               <a class="nav-link" href="{% url 'login' %}?next={{request.path}}"><span class="login_text">Sign in</span></a>
+               <a class="nav-link" href="{% url 'login' %}?next={{request.path}}"><span class="login_text"><i class="fas fa-sign-in-alt"></i> Sign in</span></a>
              </li>
              <li class="nav-item">
-               <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
+               <a class="nav-link" href="{% url 'register' %}" class="sign_up"><i class="far fa-user"></i> Sign Up</a>
              </li>
           {% endif %}
         </ul>

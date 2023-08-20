@@ -386,23 +386,44 @@
 }
 
 .nav_title1 {
-  color: var(--color-red)
+  color: var(--color-red);
 }
+
 .nav_title2 {
-  color: var(--color-orange)
+  color: var(--color-orange);
 }
+
 .username_text {
-  color: var(--color-cyan)
+  color: var(--color-cyan);
 }
+
 .logout_text {
-  color: var(--color-red)
+  color: var(--color-red);
 }
+
 .login_text {
-  color: var(--color-green)
+  color: var(--color-green);
 }
+
+.sign_up {
+  color: var(--color-orange);
+}
+
 .text_green {
-  color: var(--color-green)
+  color: var(--color-green);
 }
+
 .text_red {
-  color: var(--color-red)
+  color: var(--color-red);
+}
+
+/* Index content */
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    max-width: 800px; /* Adjust the max-width as needed */
+    padding: 20px;
 }
