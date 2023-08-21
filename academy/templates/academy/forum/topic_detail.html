@@ -36,12 +36,21 @@
             <div>
               <p class="reply-timestamp"><small>Created by {{ topic.user.username }} • {{ topic.created_at|naturaltime }}</small></p>
               <div class="like-div">
-                <button class="btn btn-link like-btn{% if serialized_topic.is_liked %} liked{% endif %}" data-topic-id="{{ topic.id }}">
-                  <span id="topic-likes-{{ topic.id }}" class="likes-count">{{ topic.likes }}</span>
-                  <i class="{% if topic.is_liked %}fas{% else %}far{% endif %} fa-heart heart-icon"></i>
-                </button>
-                <span class="topic-views">{{ topic.views }} <i class="far fa-eye"></i></span>
+                {% if user.is_authenticated%}
+                  <button class="btn btn-link like-btn{% if serialized_topic.is_liked %} liked{% endif %}" data-topic-id="{{ topic.id }}">
+                    <span id="topic-likes-{{ topic.id }}" class="likes-count">{{ topic.likes }}</span>
+                    <i class="{% if topic.is_liked %}fas{% else %}far{% endif %} fa-heart heart-icon"></i>
+                  </button>
+                  <span class="topic-views">{{ topic.views }} <i class="far fa-eye"></i></span>
+                {% else %}
+                  <p>
+                    <span id="topic-likes-{{ topic.id }}" class="likes-count">{{ topic.likes }}</span>http://127.0.0.1:8000/#
+                    <i class="far fa-heart heart-icon me-1"></i>
+                    <span class="topic-views">{{ topic.views }} <i class="far fa-eye"></i></span>
+                  </p>
+                {% endif %}
               </div>
+
             </div>
           </div>
           <hr>
