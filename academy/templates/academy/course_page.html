@@ -132,21 +132,22 @@
                     <h4>Quiz</h4>
                     {% if quiz %}
                       <p>This quiz consist on {{ quiz.questions_qty }} questions related to the course content, and you only have 2 attempts in total to try this quiz.</p>
-                      {% if  quiz_attempt.attempts_left > 0%}
                         {% if quiz_attempt %}
-                          <p>Attempts left: {{ quiz_attempt.attempts_left }}</p>
-                          {% if quiz_attempt.attempts_left < 2 %}
-                            <p>Your last attempt score: {{ quiz_attempt.score }}/{{ quiz.questions_qty }}</p>
+                          {% if  quiz_attempt.attempts_left <= 0 %}
+                            <p>Congratulations! You have completed the quiz.</p>
+                            <p class="text_green"> Your final score is {{ quiz_attempt.score }} out of {{ quiz.questions_qty }} questions.</p>
+                          {% else %}
+                            <p>Attempts left: {{ quiz_attempt.attempts_left }}</p>
+                            {% if quiz_attempt.attempts_left < 2 %}
+                              <p>Your last attempt score: {{ quiz_attempt.score }}/{{ quiz.questions_qty }}</p>
+                              <a href="{% url 'take_quiz' quiz.id %}" class="btn button">Take Quiz</a>
+                            {% endif %}
                           {% endif %}
                         {% else %}
-                          <p>You have not attempted this quiz yet.</p>
+                          <p>You have not attempted this quiz yet. Click on the button below to start the quiz.</p>
+                          <a href="{% url 'take_quiz' quiz.id %}" class="btn button">Take Quiz</a>
                         {% endif %}
-                        <a href="{% url 'take_quiz' quiz.id %}" class="btn button">Take Quiz</a>
-                      {% else%}
-                        <p>Congratulations! You have completed the quiz.</p>
-                        <p class="text_green"> Your final score is {{ quiz_attempt.score }} out of {{ quiz.questions_qty }} questions.</p>
 
-                      {% endif%}
                     {% else %}
                       <p>No quiz available for this course.</p>
                     {% endif %}
