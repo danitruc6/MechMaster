@@ -23,23 +23,47 @@
         <div class="col-md-10">
           <h3 class="mb-4">{{ topic.title }}</h3>
           <p>{{ topic.description }}</p>
-          <p class="reply-timestamp"><small>Posted by {{ topic.user.username }} • {{ topic.created_at|naturaltime }}</small></p>
-          <div class="like-div">
-            <button class="btn btn-link like-btn{% if serialized_topic.is_liked %} liked{% endif %}" data-topic-id="{{ topic.id }}">
-              <span id="topic-likes-{{ topic.id }}" class="likes-count">{{ topic.likes }}</span>
-              <i class="{% if topic.is_liked %}fas{% else %}far{% endif %} fa-heart heart-icon"></i>
-            </button>
-            <span class="topic-views">{{ topic.views }} <i class="far fa-eye"></i></span>
+          <div class="d-flex flex-row topic-bottom">
+            <div class="topic-profile-pic me-3">
+              {% if topic_profile_pic %}
+                <img class="profile-pic-forum" src="{{ topic_profile_pic.url }}" alt="Profile Picture"/> 
+              {% else %}
+                <div class="text-center align-center no-profile-pic-forum">
+                  <p style="padding-top: 2%" >{{ topic.user.username.0|capfirst }}</p>
+              </div>
+              {% endif %}
+            </div>
+            <div>
+              <p class="reply-timestamp"><small>Created by {{ topic.user.username }} • {{ topic.created_at|naturaltime }}</small></p>
+              <div class="like-div">
+                <button class="btn btn-link like-btn{% if serialized_topic.is_liked %} liked{% endif %}" data-topic-id="{{ topic.id }}">
+                  <span id="topic-likes-{{ topic.id }}" class="likes-count">{{ topic.likes }}</span>
+                  <i class="{% if topic.is_liked %}fas{% else %}far{% endif %} fa-heart heart-icon"></i>
+                </button>
+                <span class="topic-views">{{ topic.views }} <i class="far fa-eye"></i></span>
+              </div>
+            </div>
           </div>
           <hr>
           <div class="mb-4">
             <h4>{{ topic.posts.count }} Replies</h4>
-            {% for post in posts %}
-            <div class="card mb-3 reply-card">
-              <div class="card-body">
-                <p class="reply-timestamp"><small>Posted by {{ post.user.username }} • {{ post.created_at|naturaltime }}</small></p>
-                <p>{{ post.content }}</p>
-              </div>
+            {% for post, profile_pic in posts %}
+              <div class="card mb-3 reply-card">
+                <div class="card-body d-flex flex-row">
+                    <div class="user-profile-pic me-3">
+                      {% if profile_pic %}
+                        <img class="profile-pic-forum" src="{{ profile_pic.url }}" alt="Profile Picture"/> 
+                      {% else %}
+                        <div class="text-center align-center no-profile-pic-forum">
+                          <p style="padding-top: 2%" >{{ post.user.username.0|capfirst }}</p>
+                      </div>
+                      {% endif %}
+                    </div>
+                  <div class="d-flex flex-column">
+                    <p class="reply-timestamp"><small>Posted by  {{ post.user.username }} • {{ post.created_at|naturaltime }}</small></p>
+                    <p>{{ post.content }}</p>
+                  </div>
+                </div>
             </div>
             {% empty %}
             <p>No posts available.</p>

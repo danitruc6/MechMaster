@@ -377,6 +377,23 @@
   overflow: hidden; /* Hide any overflow */
 }
 
+.profile-pic-forum {
+  border-radius: 50%;
+  width: 60px; /* Set the desired width */
+  height: 60px; /* Set the desired height */
+  overflow: hidden; /* Hide any overflow */
+}
+
+.no-profile-pic-forum {
+  align-items:center !important;
+  justify-content:center !important;
+  background-color: var(--color-comment);
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+  font-size: 35px;
+}
+
 .quiz_title {
   color: var(--color-red);
 }
@@ -426,4 +443,12 @@
     margin: auto;
     max-width: 800px; /* Adjust the max-width as needed */
     padding: 20px;
+}
+
+.topic-bottom{
+  /* background-color: var(--color-selection); */
+  display: flex;
+  flex-direction: column;
+  align-items: center; */
+
 }

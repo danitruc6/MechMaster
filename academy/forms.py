@@ -6,11 +6,10 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ['profile_pic_upload','bio']
         widgets = {
-            'profile_picture': forms.TextInput(attrs={'placeholder': 'Enter the URL here', 'size':40}),
             'bio': forms.Textarea(attrs={'placeholder': 'Enter you bio here...', 'rows': 3, 'cols': 40})
         }
         labels ={
-            'profile_pic_upload':'',
+            'profile_pic_upload':'Upload your profile image \n',
             'bio': 'Bio Description',
         }
 

@@ -230,6 +230,15 @@ def forum_topic_detail(request, topic_id):
     # Serializing the topic
     serialized_topic = topic.serialize(request)
 
+    # getting the profile pictures for tipic and each post
+    topic_profile = Profile.objects.get(user=topic.user)
+    topic_profile_pic =topic_profile.profile_pic_upload
+    
+    posts_with_profile_pic = []
+    for post in posts:
+        user_profile = Profile.objects.get(user=post.user)
+        posts_with_profile_pic.append((post, user_profile.profile_pic_upload))
+
     if request.method == 'POST':
         form = ForumPostForm(request.POST)
         if form.is_valid():
@@ -241,9 +250,13 @@ def forum_topic_detail(request, topic_id):
     else:
         form = ForumPostForm()
 
-    return render(request, 'academy/forum/topic_detail.html', {'topic': topic, 'posts': posts, 'form': form, 'serialized_topic':serialized_topic})
-
-
+    return render(request, 'academy/forum/topic_detail.html', {
+        'topic': topic, 
+        'posts': posts_with_profile_pic, 
+        'form': form, 
+        'serialized_topic':serialized_topic,
+        'topic_profile_pic': topic_profile_pic,
+        })
 
 @login_required
 def forum_create_topic(request, category_id):
