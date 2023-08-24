@@ -13,6 +13,10 @@
     --color-yellow: #f1fa8c;
   }
   
+  footer {
+    margin-bottom:0px !important;
+  }
+
   /* Text colors */
   body {
     color: var(--color-foreground);
