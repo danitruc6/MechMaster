@@ -52,6 +52,64 @@ To run MechMaster on your local machine, follow these steps:
     ```
 6. Access the application in your browser at http://localhost:8000.
 
+## File tree structure description
+
+```
+.
+├── academy
+│   ├── admin.py                    -> Django admin configurations for academy app models.
+│   ├── apps.py                     -> App configuration for the academy app.
+│   ├── forms.py                    -> Forms for data input and validation in the academy app.
+│   ├── models.py                   -> Database models and relationships for the academy app.
+│   ├── static
+│   │   └── academy
+│   │       ├── academy.js           -> JavaScript functionality for the academy app.
+│   │       ├── course_page.js       -> JavaScript logic for displaying course pages.
+│   │       ├── edit_profile.js      -> JavaScript logic for editing user profiles.
+│   │       ├── images               -> Directory for static images used in the app.
+│   │       │   ├── course.jpeg      -> Image for a course.
+│   │       │   ├── intro.png        -> Introductory image.
+│   │       │   ├── learn.jpeg       -> Image related to learning.
+│   │       │   ├── login.jpeg       -> Login-related image.
+│   │       │   └── no_image.webp    -> Placeholder image.
+│   │       ├── style.css            -> Cascading Style Sheets for styling the app.
+│   │       ├── tab_logic.js         -> JavaScript logic for handling tabs.
+│   │       ├── take_quiz.js         -> JavaScript logic for taking quizzes.
+│   │       └── topic_detail.js      -> JavaScript logic for topic detail pages.
+│   ├── templates
+│   │   └── academy
+│   │       ├── course_list.html     -> HTML template for listing courses.
+│   │       ├── course_page.html     -> HTML template for displaying a course page.
+│   │       ├── course_registration.html -> HTML template for course registration.
+│   │       ├── forum
+│   │       │   ├── category_list.html  -> HTML template for listing forum categories.
+│   │       │   ├── create_topic.html   -> HTML template for creating a forum topic.
+│   │       │   ├── topic_detail.html   -> HTML template for displaying a forum topic.
+│   │       │   └── topic_list.html     -> HTML template for listing forum topics.
+│   │       ├── index.html            -> HTML template for the main index page.
+│   │       ├── layout.html           -> Base HTML template for the app's layout.
+│   │       ├── login.html            -> HTML template for user login.
+│   │       ├── profile.html          -> HTML template for displaying user profiles.
+│   │       ├── quiz_finished.html    -> HTML template for displaying finished quizzes.
+│   │       ├── quiz_result.html      -> HTML template for displaying quiz results.
+│   │       ├── register.html         -> HTML template for user registration.
+│   │       ├── resources.html        -> HTML template for displaying resources.
+│   │       └── take_quiz.html        -> HTML template for taking quizzes.
+│   ├── tests.py                     -> Test cases for the academy app.
+│   ├── urls.py                      -> URL routing for the academy app.
+│   └── views.py                     -> Views and their logic for the academy app.
+├── db.sqlite3                        -> SQLite database file.
+├── manage.py                         -> Django management script.
+├── MechMaster
+│   ├── asgi.py                       -> ASGI interface configuration for the project.
+│   ├── settings.py                   -> Project-wide settings and configurations.
+│   ├── urls.py                       -> Project-wide URL routing.
+│   └── wsgi.py                       -> WSGI interface configuration for the project.
+├── media
+│   └── images                        -> Directory for user-uploaded media images.
+├── README.md                          -> This readme file with project documentation.
+└── requirements.txt                   -> List of project dependencies.
+```
 ## Additional Information
 
 - MechMaster makes use of third-party packages like Django's embed_video for video content.
