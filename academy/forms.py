@@ -26,11 +26,11 @@ class ReviewForm(forms.ModelForm):
         label='Select your Rating',
         choices=RATING_CHOICES,
         initial=5,  # Set the initial/default value to 5 (five stars)
-        widget=forms.Select(attrs={'class': "form-control"})
+        widget=forms.Select(attrs={'class': "form-control review-form"})
     )
     comment = forms.CharField(
         label='Comment',
-        widget=forms.Textarea(attrs={'rows': 3, 'class': "form-control"})
+        widget=forms.Textarea(attrs={'rows': 3, 'class': "form-control review-form"})
     )
 
     class Meta:

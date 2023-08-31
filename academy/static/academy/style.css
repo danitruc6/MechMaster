@@ -58,7 +58,7 @@
   input[type="text"],
   input[type="email"],
   input[type="password"],
-  textarea {select.
+  textarea {
     background-color: var(--color-selection);
     color: var(--color-foreground);
     border: 1px solid var(--color-comment);
@@ -457,6 +457,7 @@
 }
 
 /* styling text area from form-control */
-.form-control {
-  background-color: var(--color-foreground) !important;
+.review-form {
+  background-color: var(--color-cyan) !important;
+  color: var(--color-background);
 }
