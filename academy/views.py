@@ -171,11 +171,15 @@ def course_page(request, course_id):
     # Get the user's quiz attempt for the course
     attempt = QuizAttempt.objects.filter(user=request.user, quiz=quiz).first()
 
+    # Initialize the ReviewForm
+    form = ReviewForm()
+
     context = {
         'course': course,
         'average_rating': average_rating,
         'quiz': quiz,
         'quiz_attempt': attempt,
+        'form': form,
     }
     return render(request, 'academy/course_page.html', context)
 
