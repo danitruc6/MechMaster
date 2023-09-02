@@ -117,15 +117,15 @@ function handleCourseRegistration(courseId, action, buttonElement) {
           buttonElement.textContent = 'Unregister';
           buttonElement.classList.remove('button');
           buttonElement.classList.add('button-alt');
-          buttonElement.removeEventListener('click', registerCourse);
-          buttonElement.addEventListener('click', () => handleCourseRegistration(courseId, 'unregister', buttonElement));
+          // buttonElement.removeEventListener('click', registerCourse);
+          // buttonElement.addEventListener('click', () => handleCourseRegistration(courseId, 'unregister', buttonElement));
         } else {
           // Update the button text and action
           buttonElement.textContent = 'Register';
           buttonElement.classList.remove('button-alt');
           buttonElement.classList.add('button');
-          buttonElement.removeEventListener('click', unregisterCourse);
-          buttonElement.addEventListener('click', () => handleCourseRegistration(courseId, 'register', buttonElement));
+          // buttonElement.removeEventListener('click', unregisterCourse);
+          // buttonElement.addEventListener('click', () => handleCourseRegistration(courseId, 'register', buttonElement));
         }
       } else {
         // Course registration/unregistration failed
@@ -140,12 +140,13 @@ function handleCourseRegistration(courseId, action, buttonElement) {
     });
 }
 
-// Function to handle course registration
-function registerCourse(event, courseId, buttonElement) {
-  handleCourseRegistration(courseId, 'register', buttonElement);
-}
 
-// Function to handle course unregistration
-function unregisterCourse(event, courseId, buttonElement) {
-  handleCourseRegistration(courseId, 'unregister', buttonElement);
+// Updated click handler for registration/unregistration
+function handleCourseToggle(courseId, buttonElement) {
+  const isRegistered = buttonElement.classList.contains('button-alt');
+
+  // Determine the action based on the current button state
+  const action = isRegistered ? 'unregister' : 'register';
+
+  handleCourseRegistration(courseId, action, buttonElement);
 }

@@ -31,9 +31,9 @@
                 <!-- Registration status and button -->
                 {% if user.is_authenticated %}
                   {% if course in user.profile.courses.all %}
-                    <button type="button" class="btn button-alt" onclick="unregisterCourse(event, {{ course.id }}, this)">Unregister</button>
+                    <button type="button" class="btn button-alt" onclick="handleCourseToggle({{ course.id }}, this)">Unregister</button>
                   {% else %}
-                    <button type="button" class="btn button" onclick="registerCourse(event, {{ course.id }}, this)">Register</button>
+                    <button type="button" class="btn button" onclick="handleCourseToggle({{ course.id }}, this)">Register</button>
                   {% endif %}
                 {% endif %}
               </div>
@@ -111,7 +111,7 @@
                     {% else %}
                     <p>You need to <a href="{% url 'login' %}">login</a> to add a review.</p>
                     {% endif %}
-                    </div>
+                </div>
                     
 
                   </div>
