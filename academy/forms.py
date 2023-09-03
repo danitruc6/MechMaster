@@ -44,7 +44,7 @@ class ForumTopicForm(forms.ModelForm):
         model = ForumTopic
         fields = ['title', 'description']
         widgets = {
-            'title': forms.TextInput(attrs={'placeholder': 'Title', 'size':70}),
+            'title': forms.TextInput(attrs={'autofocus': True, 'placeholder': 'Title', 'size':70}),
             'description': forms.Textarea(attrs={'placeholder': 'Description', 'rows': 4, 'cols': 70}),
         }
         # Removing the labels, not aesthetic 
