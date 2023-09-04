@@ -1,7 +1,7 @@
 # CS50W Final Project - MechMaster
 
 #### 🎥 YouTube URL: https://youtu.be/ZMG5NZv4R14
-[![Watch the video](https://img.youtube.com/vi/ZMG5NZv4R14/hqdefault.jpg)](https://youtu.be/nTQUwghvy5Q)
+[![Watch the video](https://img.youtube.com/vi/M6WkhHKB79A/hqdefault.jpg)](https://youtu.be/M6WkhHKB79A)
 
 ## Distinctiveness and Complexity
 
