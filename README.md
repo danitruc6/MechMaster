@@ -1,4 +1,4 @@
-# CS50W Final Project - MechMaster
+# MechMaster
 
 #### 🎥 YouTube URL: https://youtu.be/M6WkhHKB79A
 [![Watch the video](https://img.youtube.com/vi/M6WkhHKB79A/hqdefault.jpg)](https://youtu.be/M6WkhHKB79A)
